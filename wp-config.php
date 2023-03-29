@@ -24,6 +24,12 @@ define('WP_SITEURL',                    $_SERVER['WP_SITEURL']);
 define('WPOSES_AWS_ACCESS_KEY_ID',      $_SERVER['WPOSES_AWS_ACCESS_KEY_ID']);
 define('WPOSES_AWS_SECRET_ACCESS_KEY',  $_SERVER['WPOSES_AWS_SECRET_ACCESS_KEY']);
 
+define( 'AS3CF_SETTINGS', serialize( array(
+	'provider' => 'aws',
+	'access-key-id' => $_SERVER['S3_ACCESS_KEY'],
+	'secret-access-key' => $_SERVER['S3_SECRET_ACCESS_KEY'],
+) ) );
+
 $table_prefix  = 'wp_';
 define('WP_DEBUG', false);
 
