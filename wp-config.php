@@ -31,8 +31,8 @@ define( 'AS3CF_SETTINGS', serialize( array(
 ) ) );
 
 $table_prefix  = 'wp_';
-define('WP_DEBUG', true);
-define('WP_DEBUG_LOG', true);
+define('WP_DEBUG', $_SERVER['WP_DEBUG'] == 'true');
+define('WP_DEBUG_LOG', $_SERVER['WP_DEBUG_LOG'] == 'true');
 
 if ( !defined('ABSPATH') )
         define('ABSPATH', dirname(__FILE__) . '/');
