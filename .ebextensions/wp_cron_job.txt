@@ -1,2 +1,2 @@
 # The newline at the end of this file is extremely important.  Cron won't run without it.
-*/5 * * * * root /usr/bin/php -q /var/www/html/wp-cron.php > /dev/null
+*/5 * * * * webapp /usr/bin/php /var/app/current/wp-cron.php > /dev/null

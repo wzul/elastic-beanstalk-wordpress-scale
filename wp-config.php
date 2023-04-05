@@ -29,27 +29,14 @@ define( 'AS3CF_SETTINGS', serialize( array(
 	'access-key-id' => $_SERVER['S3_ACCESS_KEY'],
 	'secret-access-key' => $_SERVER['S3_SECRET_ACCESS_KEY'],
 ) ) );
-define('DISABLE_WP_CRON',               true);
+define('DISABLE_WP_CRON', true);
 
 $table_prefix  = 'wp_';
 define('WP_DEBUG', $_SERVER['WP_DEBUG'] == 'true');
 define('WP_DEBUG_LOG', $_SERVER['WP_DEBUG_LOG'] == 'true');
 
-/*@DOCKETCACHE-RUNTIME-BEGIN*/
-if(!\function_exists('docketcache_runtime')){
-  function docketcache_runtime(){
-   if(!(\PHP_VERSION_ID >= 70205)) {return;}
-   try{
-    $path="/var/app/current/wp-content/docket-cache-data";
-    $runtime=$path."/runtime.php";
-    if(is_file($runtime)){include_once $runtime;}
-   }catch(\Throwable $e){}
-  }
-  docketcache_runtime();
- }
- /*@DOCKETCACHE-RUNTIME-END*/
-
-if ( !defined('ABSPATH') )
-        define('ABSPATH', dirname(__FILE__) . '/');
+if ( !defined('ABSPATH') ) {
+  define('ABSPATH', dirname(__FILE__) . '/');
+}
         
 require_once(ABSPATH . 'wp-settings.php');
