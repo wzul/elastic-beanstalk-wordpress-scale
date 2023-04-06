@@ -1,16 +1,6 @@
 #!/bin/bash
 
-WORDPRESS_VERSION=$(/opt/elasticbeanstalk/bin/get-config environment -k WORDPRESS_VERSION)
-WORDPRESS_ARCHIVE_NAME=wordpress-$WORDPRESS_VERSION-no-content.zip
+set -e
 
-wget -q https://downloads.wordpress.org/release/$WORDPRESS_ARCHIVE_NAME
-unzip -q $WORDPRESS_ARCHIVE_NAME
-rm $WORDPRESS_ARCHIVE_NAME
-cd wordpress
-CURRENT_WP_DIRECTORY=$(pwd)
-ln -s /wpcontents $CURRENT_WP_DIRECTORY/wp-content
-chown -R webapp:webapp $CURRENT_WP_DIRECTORY
-mv $CURRENT_WP_DIRECTORY/* $CURRENT_WP_DIRECTORY/..
-rmdir $CURRENT_WP_DIRECTORY
-
-echo 'WordPress installation and configuration is now completed.'
+CURRENT_DIRECTORY=$(pwd)
+/bin/bash $CURRENT_DIRECTORY/../../hooks/prebuild/01_install_wordpress.sh
