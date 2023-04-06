@@ -25,18 +25,22 @@ define('WPOSES_AWS_ACCESS_KEY_ID',      $_SERVER['WPOSES_AWS_ACCESS_KEY_ID']);
 define('WPOSES_AWS_SECRET_ACCESS_KEY',  $_SERVER['WPOSES_AWS_SECRET_ACCESS_KEY']);
 
 define( 'AS3CF_SETTINGS', serialize( array(
-	'provider' => 'aws',
-	'access-key-id' => $_SERVER['S3_ACCESS_KEY'],
-	'secret-access-key' => $_SERVER['S3_SECRET_ACCESS_KEY'],
+  'provider' => 'aws',
+  'access-key-id' => $_SERVER['S3_ACCESS_KEY'],
+  'secret-access-key' => $_SERVER['S3_SECRET_ACCESS_KEY'],
 ) ) );
+
 define('DISABLE_WP_CRON', true);
 
 $table_prefix  = 'wp_';
+
 define('WP_DEBUG', $_SERVER['WP_DEBUG'] == 'true');
 define('WP_DEBUG_LOG', $_SERVER['WP_DEBUG_LOG'] == 'true');
+
+define( 'WP_AUTO_UPDATE_CORE', false );
 
 if ( !defined('ABSPATH') ) {
   define('ABSPATH', dirname(__FILE__) . '/');
 }
-        
+
 require_once(ABSPATH . 'wp-settings.php');
