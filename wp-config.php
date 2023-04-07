@@ -49,4 +49,18 @@ if ( !defined('ABSPATH') ) {
   define('ABSPATH', dirname(__FILE__) . '/');
 }
 
+if ( isset( $_SERVER['DOCKET_CACHE'] ) ) {
+  if(!\function_exists('docketcache_runtime')){
+    function docketcache_runtime(){
+     if(!(\PHP_VERSION_ID >= 70205)) {return;}
+     try{
+      $path="/var/app/current/wp-content/docket-cache-data";
+      $runtime=$path."/runtime.php";
+      if(is_file($runtime)){include_once $runtime;}
+     }catch(\Throwable $e){}
+    }
+    docketcache_runtime();
+  }
+}
+
 require_once(ABSPATH . 'wp-settings.php');

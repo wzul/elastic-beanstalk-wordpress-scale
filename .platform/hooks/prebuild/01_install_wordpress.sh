@@ -10,6 +10,7 @@ cd wordpress
 CURRENT_WP_DIRECTORY=$(pwd)
 chown -R webapp:webapp $CURRENT_WP_DIRECTORY/..
 ln -s /wpcontents $CURRENT_WP_DIRECTORY/wp-content
+chown webapp:webapp $CURRENT_WP_DIRECTORY/wp-content
 mv $CURRENT_WP_DIRECTORY/* $CURRENT_WP_DIRECTORY/..
 cd ..
 rmdir $CURRENT_WP_DIRECTORY
