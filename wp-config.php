@@ -1,7 +1,13 @@
 <?php
 
-if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
-    $_SERVER['HTTPS']='on';
+if ( isset( $_SERVER['WP_SUPER_CACHE'] ) ) {
+  define( 'WPCACHEHOME', '/wpcontents/plugins/wp-super-cache/' );
+  define( 'WP_CACHE', true );
+}
+
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+  $_SERVER['HTTPS']='on';
+}
 
 define('DB_NAME',                       $_SERVER['RDS_DB_NAME']);
 define('DB_USER',                       $_SERVER['RDS_USERNAME']);
