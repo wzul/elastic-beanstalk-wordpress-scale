@@ -40,6 +40,11 @@ if ( isset($_SERVER['S3_ACCESS_KEY']) AND isset($_SERVER['S3_SECRET_ACCESS_KEY']
 
 define('DISABLE_WP_CRON', true);
 
+// In a very demanded situation, WordPress frontend requires more memory than default
+if ( isset($_SERVER['WP_FRONTEND_MEMORY_LIMIT']) ) {
+  define('WP_MEMORY_LIMIT', $_SERVER['WP_FRONTEND_MEMORY_LIMIT']); // '256M'
+}
+
 $table_prefix  = 'wp_';
 
 if ( isset($_SERVER['WP_DEBUG']) AND isset($_SERVER['WP_DEBUG_LOG'])) {
