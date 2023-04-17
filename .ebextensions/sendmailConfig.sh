@@ -54,7 +54,7 @@ if test "${MAIL_HOST+isset}" && test "${MAIL_USERNAME+isset}" && test "${MAIL_PA
             chmod 666 /etc/mail/sendmail.cf
             m4 /etc/mail/sendmail.mc > /etc/mail/sendmail.cf
             chmod 644 /etc/mail/sendmail.cf
-            /etc/init.d/sendmail restart
+            systemctl restart sendmail
 
         fi;
 
@@ -62,5 +62,3 @@ if test "${MAIL_HOST+isset}" && test "${MAIL_USERNAME+isset}" && test "${MAIL_PA
     else
         echo "All mail env vars were not present, skipping configuration";
 fi;
-
-rm sendmailBashEnv
