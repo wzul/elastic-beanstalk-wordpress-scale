@@ -16,28 +16,20 @@
 echo "Starting sendmail configuration"
 
 # get environmental variables into a readable format
-/opt/elasticbeanstalk/bin/get-config environment --output yaml | sed -n '1!p' | sed -e 's/^\(.*\): /\1=/g' > sendmailBashEnv
-
-declare -A ary
-
-readarray -t lines < "sendmailBashEnv"
-
-# create an array for variables so we can more easily access them
-for line in "${lines[@]}"; do
-   key=${line%%=*}
-   value=${line#*=}
-   ary[$key]=$value
-done
+MAIL_HOST=$(/opt/elasticbeanstalk/bin/get-config environment -k MAIL_HOST)
+MAIL_USERNAME=$(/opt/elasticbeanstalk/bin/get-config environment -k MAIL_USERNAME)
+MAIL_PASSWORD=$(/opt/elasticbeanstalk/bin/get-config environment -k MAIL_PASSWORD)
+MAIL_DOMAIN=$(/opt/elasticbeanstalk/bin/get-config environment -k MAIL_DOMAIN)
 
 # check that all variables needs are present
-if test "${ary['MAIL_HOST']+isset}" && test "${ary['MAIL_USERNAME']+isset}" && test "${ary['MAIL_PASSWORD']+isset}" && test "${ary['MAIL_DOMAIN']+isset}"
+if test "${MAIL_HOST+isset}" && test "${MAIL_USERNAME+isset}" && test "${MAIL_PASSWORD+isset}" && test "${MAIL_DOMAIN+isset}"
     then
         echo "Found all mail env vars, checking for existing sendmail configuration";
 
-        HOST=${ary['MAIL_HOST']}
-        USERNAME=${ary['MAIL_USERNAME']}
-        PASSWORD=${ary['MAIL_PASSWORD']}
-        FROM=${ary['MAIL_DOMAIN']}
+        HOST=${MAIL_HOST}
+        USERNAME=${MAIL_USERNAME}
+        PASSWORD=${MAIL_PASSWORD}
+        FROM=${MAIL_DOMAIN}
 
         if grep -q "$HOST" /etc/mail/sendmail.mc; then
             echo "Found host in sendmail.mc, skipping configuration"
