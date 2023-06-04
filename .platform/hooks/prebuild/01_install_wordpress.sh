@@ -15,5 +15,6 @@ mv $CURRENT_WP_DIRECTORY/* $CURRENT_WP_DIRECTORY/..
 cd ..
 rmdir $CURRENT_WP_DIRECTORY
 chmod 0444 wp-config.php
+chown -R webapp:webapp /wpcontents/wflogs
 
 echo 'WordPress installation and configuration is now completed.'
